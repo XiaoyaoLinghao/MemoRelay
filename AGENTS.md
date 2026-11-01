@@ -1,0 +1,3 @@
+# MemoRelay 开发约定
+
+先读README、docs/NAMING-MIGRATION与docs/VALIDATION。两个子系统是独立仓库，通过submodule固定提交，改动需各自提交后再更新主仓库指针。保持DMA/knowledge_weaver旧运行模块及契约兼容，不机械改数据ID或历史文档。测试用显式隔离来源/新临时数据库，不读真实默认HOME、不触碰凭据或生产数据；禁止把私人资料和运行库加入Git。现有试运行不是本次上传的写入范围。不要递归创建agent或自动部署。发布前独立审核实际diff并运行相应检查。

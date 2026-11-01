@@ -1,0 +1,6 @@
+[submodule "bridge"]
+	path = components/bridge
+	url = ../MemoRelay-Bridge.git
+[submodule "core"]
+	path = components/core
+	url = ../MemoRelay-Core.git

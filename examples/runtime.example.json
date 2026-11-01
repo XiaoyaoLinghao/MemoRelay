@@ -1,0 +1,48 @@
+{
+  "package_dir": "CHANGE_ME/core-venv/lib/python3.11/site-packages",
+  "state_dir": "CHANGE_ME/private-state",
+  "db": "CHANGE_ME/private-state/kw/knowledge.db",
+  "socket": "CHANGE_ME/kw.sock",
+  "workspace_id": "owner:example",
+  "project_aliases": {
+    "Example": "project:example"
+  },
+  "capture_projects": [
+    "project:example"
+  ],
+  "allowed_projects": [
+    "project:example"
+  ],
+  "default_recall_projects": [],
+  "allow_workspace_search": true,
+  "adapters": [],
+  "model": {
+    "url": "http://127.0.0.1:3002/v1/chat/completions",
+    "name": "CHANGE_ME",
+    "credential_file": "CHANGE_ME/private-model-credentials.json",
+    "credential_json_path": [
+      "key"
+    ],
+    "timeout": 150
+  },
+  "embedding": {
+    "url": "http://127.0.0.1:3083/v1/embeddings",
+    "model": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "dimension": 1024
+  },
+  "redaction_secret_refs": [],
+  "delivery_rounds": 4,
+  "extraction_concurrency": 2,
+  "extraction_jobs_per_cycle": 12,
+  "embedding_jobs_per_cycle": 256,
+  "history_backfill": {
+    "enabled": false,
+    "storage": "kw_jobs",
+    "plan": "CHANGE_ME/history-plan.json",
+    "release_per_cycle": 8,
+    "max_active_before_release": 1,
+    "max_embedding_backlog": 128,
+    "max_priority": 2
+  }
+}

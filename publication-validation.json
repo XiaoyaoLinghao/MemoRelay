@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "at": "2026-11-01T11:30:25.678703+00:00",
+  "new_clean_venv": true,
+  "production_packages_used": false,
+  "versions": {
+    "memorelay-core": "2.0.0rc1",
+    "memorelay-bridge": "2.0.0rc1"
+  },
+  "suites": {
+    "core": {
+      "testcases": 714,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "initial_expected_rename_failure": "test_locked_build_inputs_and_wheel_provenance_are_recorded required old distribution name knowledge-weaver",
+      "rename_regression_retest_passed": true,
+      "unresolved_failures": 0,
+      "note": "713 baseline cases passed, one strict distribution-name assertion adapted to memorelay-core and independently rerun passed; no test removed or weakened.",
+      "final_effective_passes": 714
+    },
+    "bridge": {
+      "testcases": 287,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 6,
+      "initial_node_skips": 6,
+      "node_skips_retested_passed": 6,
+      "unresolved_skips": 0,
+      "final_effective_passes": 287
+    },
+    "e2e": {
+      "testcases": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "excluded": [
+    "Bridge tests/integrations/test_dsh_plugin.py",
+    "tests/e2e/test_hermes_manager_integration.py"
+  ],
+  "native_production_redeployment": false,
+  "repository_provenance_repin_verified": true,
+  "notes": [
+    "Initial Core old-name assertion and Bridge old sibling/provenance failures retained; package/source names adapted with same strict checks.",
+    "Initial six Node skips caused by SSH PATH; all six rerun with existing Node and passed.",
+    "Core713+1 targeted retest, Bridge281+6 Node retests, plus full new repository contract tests and E2E45 passed.",
+    "No genuine-HOME tests added to execution, no models or production services used."
+  ]
+}

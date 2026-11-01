@@ -1,0 +1,12 @@
+.venv/
+.runtime/
+artifacts/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.*
+credentials*.json
+runtime.local.json
