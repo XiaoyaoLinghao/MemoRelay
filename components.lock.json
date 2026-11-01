@@ -6,13 +6,13 @@
   "components": {
     "core": {
       "repository": "https://github.com/XiaoyaoLinghao/MemoRelay-Core",
-      "commit": "928a92b101b387c72f3bf206c7095ba0b153a2a7",
+      "commit": "d27fceea6e531bb93e847d41f873f4c24b99ef59",
       "path": "components/core",
       "chinese_name": "知枢"
     },
     "bridge": {
       "repository": "https://github.com/XiaoyaoLinghao/MemoRelay-Bridge",
-      "commit": "0ef097fa8c744b1e3de09e1e21727def3aa940eb",
+      "commit": "c71eaafbebe1dd6e45a6a6b0da729fb35113c631",
       "path": "components/bridge",
       "chinese_name": "忆桥"
     }
