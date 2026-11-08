@@ -10,3 +10,8 @@ __pycache__/
 .env.*
 credentials*.json
 runtime.local.json
+
+.pytest_cache/
+*.egg-info/
+build/
+dist/

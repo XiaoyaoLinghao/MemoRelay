@@ -67,17 +67,27 @@ def cycle(config):
   original=urllib.request.urlopen;ledger_lock=threading.Lock()
   def audited(request,*a,**kw):
    if getattr(request,"full_url","")!=model["url"]:return original(request,*a,**kw)
+   request=with_output_budget(request,model.get("max_output_tokens"))
+   from model_affinity import with_model_affinity
+   request=with_model_affinity(request)
    t=time.monotonic();record={"at":datetime.datetime.now(datetime.timezone.utc).isoformat(),"billing_outcome":"unknown","input_request_bytes":len(request.data or b"")}
    try:
     request_data=json.loads(request.data);context=json.loads(request_data["messages"][1]["content"])["context"];record.update(event_id=context["event_id"],event_revision=context["event_revision"],prompt_version=context["prompt_version"])
     with original(request,*a,**kw) as response:data=response.read();record["http_status"]=response.status
-    payload=json.loads(data);record.update(usage=payload.get("usage"),model=payload.get("model"),billing_outcome="provider_usage_reported" if payload.get("usage") else "unknown");return io.BytesIO(data)
+    payload=json.loads(data);record.update(response_metadata(payload));record.update(usage=payload.get("usage"),model=payload.get("model"),billing_outcome="provider_usage_reported" if payload.get("usage") else "unknown");return io.BytesIO(data)
+   except Exception as exc:
+    record["exception_class"]=type(exc).__name__
+    if isinstance(exc,urllib.error.HTTPError):record["http_status"]=exc.code
+    raise
    finally:
     record["seconds"]=time.monotonic()-t
     with ledger_lock:
      date=datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d")
      with (root/"logs"/("model-usage-"+date+".jsonl")).open("a") as f:f.write(json.dumps(record,ensure_ascii=False)+"\n")
   http_client.urllib.request.urlopen=audited
+  from trial_diagnostics import DiagnosticExtractor,with_output_budget,response_metadata
+  from knowledge_weaver import contracts
+  extractor=DiagnosticExtractor(extractor,contracts.validate_extraction_output,root/"logs"/"extraction-diagnostics.jsonl")
   report["extract"]=[]
   try:
    workers=max(1,min(4,int(config.get("extraction_concurrency",2))))
@@ -86,7 +96,12 @@ def cycle(config):
    with concurrent.futures.ThreadPoolExecutor(workers) as pool:
     for offset in range(0,budget,workers):
      results=list(pool.map(work,range(offset,min(offset+workers,budget))));report["extract"].extend(results)
-     if any(x.get("claimed") and x.get("state")!="succeeded" for x in results):report["ok"]=False;break
+     failures=[x for x in results if x.get("claimed") and x.get("state")!="succeeded"]
+     if failures:
+      report["ok"]=False
+      # A bounded semantic rejection must not stop unrelated ready work.
+      # Provider/unknown failures still stop this cycle to avoid outage churn.
+      if any(x.get("failure_category") not in ("field_identity_collision","model_review_required") for x in failures):break
      if not any(x.get("claimed") for x in results):break
   finally:
    http_client.urllib.request.urlopen=original

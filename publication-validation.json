@@ -1,51 +1,47 @@
 {
-  "ok": true,
-  "at": "2026-11-01T11:30:25.678703+00:00",
-  "new_clean_venv": true,
-  "production_packages_used": false,
-  "versions": {
-    "memorelay-core": "2.0.0rc1",
-    "memorelay-bridge": "2.0.0rc1"
-  },
-  "suites": {
+  "release": "2.0.0",
+  "date": "2026-11-08",
+  "environment": "macOS 13 Intel; fresh isolated Python3.11 and Python3.14 venvs; hash-locked dependencies; wheel installs with --no-index --no-deps",
+  "independent_reviewer": "Codex",
+  "results": {
     "core": {
-      "testcases": 714,
-      "failures": 1,
-      "errors": 0,
-      "skipped": 0,
-      "initial_expected_rename_failure": "test_locked_build_inputs_and_wheel_provenance_are_recorded required old distribution name knowledge-weaver",
-      "rename_regression_retest_passed": true,
-      "unresolved_failures": 0,
-      "note": "713 baseline cases passed, one strict distribution-name assertion adapted to memorelay-core and independently rerun passed; no test removed or weakened.",
-      "final_effective_passes": 714
+      "passed": 877
     },
     "bridge": {
-      "testcases": 287,
-      "failures": 0,
-      "errors": 0,
-      "skipped": 6,
-      "initial_node_skips": 6,
-      "node_skips_retested_passed": 6,
-      "unresolved_skips": 0,
-      "final_effective_passes": 287
-    },
-    "e2e": {
-      "testcases": 45,
-      "failures": 0,
-      "errors": 0,
+      "passed": 335,
+      "subtests_passed": 4,
       "skipped": 0
+    },
+    "integration": {
+      "passed": 45
+    },
+    "hermes_python314": {
+      "passed": 125
+    },
+    "external_scheduler": {
+      "passed": 1,
+      "assertion_groups": 10
     }
   },
+  "checks": [
+    "pip check",
+    "new and legacy CLI --help",
+    "both installed distributions 2.0.0, no legacy distributions mixed",
+    "contract bytes and provenance",
+    "new and legacy search names/scope",
+    "recall results classified as memory injection in both adapters"
+  ],
   "excluded": [
-    "Bridge tests/integrations/test_dsh_plugin.py",
+    "components/bridge/tests/integrations/test_dsh_plugin.py",
     "tests/e2e/test_hermes_manager_integration.py"
   ],
-  "native_production_redeployment": false,
-  "repository_provenance_repin_verified": true,
-  "notes": [
-    "Initial Core old-name assertion and Bridge old sibling/provenance failures retained; package/source names adapted with same strict checks.",
-    "Initial six Node skips caused by SSH PATH; all six rerun with existing Node and passed.",
-    "Core713+1 targeted retest, Bridge281+6 Node retests, plus full new repository contract tests and E2E45 passed.",
-    "No genuine-HOME tests added to execution, no models or production services used."
-  ]
+  "initial_failures_and_fixes": [
+    "New search name was not recognized by two native readers; preserved both names as memory injection, added old/new tests.",
+    "Node test assumed one registered name; now asserts the exact new/legacy pair and one context.",
+    "A syntax error while adding an extra test case was corrected before final rerun."
+  ],
+  "known_warning": "Core pytest asyncio_mode config warning without optional legacy pytest-asyncio extra.",
+  "natural_coverage": "Not all natural business tasks, all host versions, or strict production compression hook receipts were exercised; controlled tests do not establish those claims.",
+  "production_data_in_repository": false,
+  "private_logs_and_receipts": "not published"
 }

@@ -1,22 +1,15 @@
 {
-  "product": "MemoRelay",
-  "chinese_name": "承忆",
-  "version": "2.0.0rc1",
-  "status": "trial_candidate",
+  "version": "2.0.0",
   "components": {
     "core": {
       "repository": "https://github.com/XiaoyaoLinghao/MemoRelay-Core",
-      "commit": "d27fceea6e531bb93e847d41f873f4c24b99ef59",
-      "path": "components/core",
-      "chinese_name": "知枢"
+      "commit": "e29b57e371e72d9ec0e2464427d075d336a6927e",
+      "version": "2.0.0"
     },
     "bridge": {
       "repository": "https://github.com/XiaoyaoLinghao/MemoRelay-Bridge",
-      "commit": "c71eaafbebe1dd6e45a6a6b0da729fb35113c631",
-      "path": "components/bridge",
-      "chinese_name": "忆桥"
+      "commit": "837a1211d99c439b63a9f9a669a74cb17ed22d0f",
+      "version": "2.0.0"
     }
-  },
-  "source_history": "Reviewed source snapshots; original repositories preserved. See component SOURCE_PROVENANCE.json.",
-  "production_redeployment": false
+  }
 }
