@@ -4,12 +4,20 @@
     "core": {
       "repository": "https://github.com/XiaoyaoLinghao/MemoRelay-Core",
       "commit": "e29b57e371e72d9ec0e2464427d075d336a6927e",
-      "version": "2.0.0"
+      "version": "2.0.0",
+      "path": "components/core",
+      "chinese_name": "知枢"
     },
     "bridge": {
       "repository": "https://github.com/XiaoyaoLinghao/MemoRelay-Bridge",
       "commit": "837a1211d99c439b63a9f9a669a74cb17ed22d0f",
-      "version": "2.0.0"
+      "version": "2.0.0",
+      "path": "components/bridge",
+      "chinese_name": "忆桥"
     }
-  }
+  },
+  "product": "MemoRelay",
+  "chinese_name": "承忆",
+  "status": "stable",
+  "source_history": "Reviewed source snapshots; original repositories preserved. See per-component provenance manifests."
 }
